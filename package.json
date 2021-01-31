@@ -1,0 +1,34 @@
+{
+  "name": "sqs-mv",
+  "version": "1.0.0",
+  "scripts": {
+    "analyze": "npm run lint && npm run test --coverage && npm run build",
+    "build": "sls package",
+    "clean": "rm -rf .serverless .webpack coverage",
+    "deploy": "sls deploy",
+    "format": "skripts format",
+    "invoke:local": "STAGE=local sls invoke local --function func",
+    "lint": "skripts lint --fix",
+    "test": "skripts test"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.4.1",
+    "p-limit": "^2.2",
+    "p-whilst": "^2.1",
+    "source-map-support": "^0.5"
+  },
+  "devDependencies": {
+    "@types/jest-when": "^2.7.2",
+    "eslint": "^7.18",
+    "husky": "^4.3",
+    "jest-when": "^3.1.0",
+    "skripts": "^0.9",
+    "typescript": "^4"
+  },
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "skripts pre-commit"
+    }
+  }
+}
