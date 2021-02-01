@@ -16,8 +16,10 @@ export async function move(evt: Event): Promise<void> {
   }
 
   const msgs = await receiveMsgs(evt.srcUrl)
+  console.log(
+    `Moving ${msgs.length} messages from ${evt.srcUrl} to ${evt.dstUrl}`
+  )
   await Promise.all(msgs.map((m) => limit<Message[], unknown>(moveMsg, m)))
-  console.log(`Moved ${msgs.length} messages`)
 }
 
 async function receiveMsgs(url: string) {
@@ -27,7 +29,7 @@ async function receiveMsgs(url: string) {
     () => !stop,
     async () => {
       const batch = await receiveBatch(url)
-      batch ? (msgs = msgs.concat(batch)) : (stop = true)
+      batch && batch.length ? (msgs = msgs.concat(batch)) : (stop = true)
     }
   )
   return msgs

@@ -14,17 +14,16 @@ module.exports = {
     iamRoleStatements: [
       {
         Effect: "Allow",
-        Action: ["sqs:DeleteMessage", "sqs:ReceiveMessage"],
-        Resource:
-          "arn:aws:sqs:${self:provider.region}:#{AWS::AccountId}:test-queue-deadletter-${self:provider.stage}",
+        Action: ["kms:Decrypt"],
+        Resource: "arn:aws:kms:${self:provider.region}:#{AWS::AccountId}:key/*",
       },
       {
         Effect: "Allow",
-        Action: ["sqs:SendMessage"],
-        Resource:
-          "arn:aws:sqs:${self:provider.region}:#{AWS::AccountId}:test-queue-${self:provider.stage}",
+        Action: ["sqs:DeleteMessage", "sqs:ReceiveMessage", "sqs:SendMessage"],
+        Resource: "arn:aws:sqs:${self:provider.region}:#{AWS::AccountId}:*",
       },
     ],
+    memorySize: 1024,
   },
-  functions: { func: { handler: "src/handler.handle", timeout: 30 } },
+  functions: { func: { handler: "src/handler.handle", timeout: 120 } },
 }
