@@ -1,7 +1,7 @@
 import { Message, SQS } from "@aws-sdk/client-sqs"
 import pLimit from "p-limit"
 import pWhilst from "p-whilst"
-import { Event } from "."
+import { Event, QueueUrl } from "."
 
 const limit = pLimit(50)
 const sqs = new SQS({})
@@ -22,7 +22,7 @@ export async function move(evt: Event): Promise<void> {
   await Promise.all(msgs.map((m) => limit<Message[], unknown>(moveMsg, m)))
 }
 
-async function receiveMsgs(url: string) {
+async function receiveMsgs(url: QueueUrl) {
   let stop = false
   let msgs = [] as Message[]
   await pWhilst(
@@ -35,7 +35,7 @@ async function receiveMsgs(url: string) {
   return msgs
 }
 
-async function receiveBatch(url: string) {
+async function receiveBatch(url: QueueUrl) {
   return (
     await sqs.receiveMessage({
       MaxNumberOfMessages: 10,
@@ -46,10 +46,10 @@ async function receiveBatch(url: string) {
   ).Messages
 }
 
-async function sendMessage(url: string, body?: string) {
+async function sendMessage(url: QueueUrl, body?: string) {
   return sqs.sendMessage({ MessageBody: body, QueueUrl: url })
 }
 
-async function deleteMessage(url: string, receiptHandle?: string) {
+async function deleteMessage(url: QueueUrl, receiptHandle?: string) {
   return sqs.deleteMessage({ QueueUrl: url, ReceiptHandle: receiptHandle })
 }

@@ -1,4 +1,8 @@
+type Opaque<K, T> = T & { __TYPE__: K }
+
+export type QueueUrl = Opaque<"QueueUrl", string>
+
 export interface Event {
-  srcUrl: string
-  dstUrl: string
+  srcUrl: QueueUrl
+  dstUrl: QueueUrl
 }

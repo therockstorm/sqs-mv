@@ -11,11 +11,13 @@ sqs.mockImplementationOnce(() => ({
   sendMessage,
 }))
 
+import { QueueUrl } from "../src"
 import { move } from "../src/move"
 
 describe("move", () => {
-  const srcUrl = "su"
-  const dstUrl = "du"
+  const srcUrl = "su" as QueueUrl
+  const dstUrl = "du" as QueueUrl
+  const invalidUrl = "" as QueueUrl
   const body = "b"
   const receiptHandle = "rh"
 
@@ -26,7 +28,7 @@ describe("move", () => {
   })
 
   it("throws if missing srcUrl", async () =>
-    expect(move({ srcUrl: "", dstUrl: dstUrl })).rejects.toThrow(
+    expect(move({ srcUrl: invalidUrl, dstUrl: dstUrl })).rejects.toThrow(
       "srcUrl required"
     ))
 
@@ -36,7 +38,7 @@ describe("move", () => {
     })
     mockReceive({})
 
-    await expect(move({ srcUrl: srcUrl, dstUrl: "" })).rejects.toThrow(
+    await expect(move({ srcUrl: srcUrl, dstUrl: invalidUrl })).rejects.toThrow(
       "dstUrl required"
     )
   })

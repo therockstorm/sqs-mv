@@ -6,11 +6,11 @@ import { App, Construct, Duration, Stack, StackProps } from "@aws-cdk/core"
 import { join } from "path"
 import { name } from "../package.json"
 
-const AwsAccountId = "XXX"
+const AwsAccountId = "925878747892"
 const AwsProfile = process.env.AWS_PROFILE || ""
 const AwsRegion = "us-west-2"
-const KeyId = "YYY"
-const QueueName = "ZZZ"
+const KeyId = "b33c5691-7fdd-47b1-b336-5fdbbc254521"
+const QueueName = "vertex-metadata-indexer"
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
