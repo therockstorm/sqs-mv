@@ -29,7 +29,7 @@
     "eslint": "^7.18",
     "husky": "^4.3",
     "jest-when": "^3.1.0",
-    "skripts": "^0.9",
+    "skripts": "^0.10",
     "typescript": "^4"
   },
   "private": true,
