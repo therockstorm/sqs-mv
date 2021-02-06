@@ -11,7 +11,4 @@ An AWS Lambda function that moves SQS messages from one queue to another.
 
 - Run tests, `yarn test`
 - Invoke locally, `yarn invoke:local`
-
-## Deploying
-
-- Ensure your [AWS credentials are available](https://serverless.com/framework/docs/providers/aws/guide/credentials/) and run `STAGE=your-stage DEPLOYMENT_BUCKET=your-bucket yarn deploy`
+- Deploy, `yarn deploy`

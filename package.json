@@ -2,13 +2,15 @@
   "name": "sqs-mv",
   "version": "1.0.0",
   "scripts": {
-    "analyze": "npm run lint && npm run test --coverage && npm run build",
+    "analyze": "yarn lint && yarn test --coverage && yarn build",
     "build": "sls package",
-    "clean": "rm -rf .serverless .webpack coverage",
+    "clean": "rm -rf .webpack coverage",
     "deploy": "sls deploy",
+    "deploy:cdk": "cd scripts && cdk deploy",
     "format": "skripts format",
     "invoke:local": "STAGE=local sls invoke local --function func",
     "lint": "skripts lint --fix",
+    "synth": "cd scripts && tsc && cdk synth --no-version-reporting --strict",
     "test": "skripts test"
   },
   "dependencies": {
@@ -18,7 +20,12 @@
     "source-map-support": "^0.5"
   },
   "devDependencies": {
+    "@aws-cdk/aws-kms": "^1.88.0",
+    "@aws-cdk/aws-lambda": "^1.88.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.88.0",
+    "@aws-cdk/aws-sqs": "^1.88.0",
     "@types/jest-when": "^2.7.2",
+    "cdk": "^1.88.0",
     "eslint": "^7.18",
     "husky": "^4.3",
     "jest-when": "^3.1.0",

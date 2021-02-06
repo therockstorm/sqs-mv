@@ -1,8 +1,13 @@
 .DS_Store
 
+.cdk.staging
 .idea/
-.serverless/
 .vscode/
 .webpack/
+cdk.out
 coverage/
 node_modules/
+
+*.js
+!jest.config.js
+*.d.ts
