@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "analyze": "yarn lint && yarn test --coverage && yarn build",
-    "build": "sls package",
     "clean": "rm -rf .webpack coverage",
     "deploy": "cd scripts && cdk deploy",
     "format": "skripts format",
-    "invoke:local": "STAGE=local sls invoke local --function func",
     "lint": "skripts lint --fix",
     "synth": "cd scripts && tsc && cdk synth --no-version-reporting --strict",
     "test": "skripts test"

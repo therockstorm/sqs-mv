@@ -1,4 +1,5 @@
 .DS_Store
+deploy_dev.sh
 
 .cdk.staging
 .idea/
@@ -7,9 +8,5 @@
 cdk.out
 coverage/
 node_modules/
-
-*.js
-!jest.config.js
-*.d.ts
-
-deploy_dev.sh
+scripts/*.js
+scripts/*.d.ts
