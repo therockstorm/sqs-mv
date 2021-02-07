@@ -1,7 +1,7 @@
 import { Key } from "@aws-cdk/aws-kms"
 import { Runtime } from "@aws-cdk/aws-lambda"
 import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs"
-import { Queue } from "@aws-cdk/aws-sqs"
+import { IQueue, Queue } from "@aws-cdk/aws-sqs"
 import { App, Construct, Duration, Stack, StackProps } from "@aws-cdk/core"
 import { join } from "path"
 import { envVar } from "../src/util"
@@ -13,22 +13,8 @@ export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    const srcQueue = Queue.fromQueueArn(
-      this,
-      "SrcQueue",
-      `arn:aws:sqs:${this.region}:${this.account}:${envVar(
-        "SQS_MV_SRC_QUEUE_NAME"
-      )}`
-    )
-
-    const dstQueue = Queue.fromQueueArn(
-      this,
-      "DstQueue",
-      `arn:aws:sqs:${this.region}:${this.account}:${envVar(
-        "SQS_MV_DST_QUEUE_NAME"
-      )}`
-    )
-
+    const srcQueue = this.fromQueueName("SrcQueue", "SQS_MV_SRC_QUEUE_NAME")
+    const dstQueue = this.fromQueueName("DstQueue", "SQS_MV_DST_QUEUE_NAME")
     const func = new NodejsFunction(this, "Func", {
       bundling: { minify: true, sourceMap: true },
       entry: join(__dirname, "..", "src", "handler.ts"),
@@ -55,6 +41,14 @@ export class MyStack extends Stack {
     key.grantDecrypt(func)
     srcQueue.grantConsumeMessages(func)
     dstQueue.grantSendMessages(func)
+  }
+
+  fromQueueName(id: string, ev: string): IQueue {
+    return Queue.fromQueueArn(
+      this,
+      id,
+      `arn:aws:sqs:${this.region}:${this.account}:${envVar(ev)}`
+    )
   }
 }
 
