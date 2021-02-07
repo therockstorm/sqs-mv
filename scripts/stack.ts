@@ -4,22 +4,41 @@ import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs"
 import { Queue } from "@aws-cdk/aws-sqs"
 import { App, Construct, Duration, Stack, StackProps } from "@aws-cdk/core"
 import { join } from "path"
+import { envVar } from "../src/util"
 import { name } from "../package.json"
 
-const AwsAccountId = "925878747892"
-const AwsProfile = process.env.AWS_PROFILE || ""
-const AwsRegion = "us-west-2"
-const KeyId = "b33c5691-7fdd-47b1-b336-5fdbbc254521"
-const QueueName = "vertex-metadata-indexer"
+const AwsProfile = envVar("AWS_PROFILE")
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
+    const srcQueue = Queue.fromQueueArn(
+      this,
+      "SrcQueue",
+      `arn:aws:sqs:${this.region}:${this.account}:${envVar(
+        "SQS_MV_SRC_QUEUE_NAME"
+      )}`
+    )
+
+    const dstQueue = Queue.fromQueueArn(
+      this,
+      "DstQueue",
+      `arn:aws:sqs:${this.region}:${this.account}:${envVar(
+        "SQS_MV_DST_QUEUE_NAME"
+      )}`
+    )
+
     const func = new NodejsFunction(this, "Func", {
       bundling: { minify: true, sourceMap: true },
       entry: join(__dirname, "..", "src", "handler.ts"),
+      environment: {
+        SRC_URL: srcQueue.queueUrl,
+        DST_URL: dstQueue.queueUrl,
+      },
+      functionName: `sqs-mv-func-${AwsProfile}`,
       handler: "handle",
+      logRetention: 7,
       memorySize: 1024,
       runtime: Runtime.NODEJS_12_X,
       timeout: Duration.minutes(2),
@@ -28,28 +47,23 @@ export class MyStack extends Stack {
     const key = Key.fromKeyArn(
       this,
       "SqsKey",
-      `arn:aws:kms:${AwsRegion}:${AwsAccountId}:key/${KeyId}`
+      `arn:aws:kms:${this.region}:${this.account}:key/${envVar(
+        "SQS_MV_KMS_KEY_ID"
+      )}`
     )
+
     key.grantDecrypt(func)
-
-    const queue = Queue.fromQueueArn(
-      this,
-      "DstQueue",
-      `arn:aws:sqs:${AwsRegion}:${AwsAccountId}:${QueueName}-${AwsProfile}`
-    )
-    queue.grantSendMessages(func)
-
-    const deadletterQueue = Queue.fromQueueArn(
-      this,
-      "SrcQueue",
-      `arn:aws:sqs:${AwsRegion}:${AwsAccountId}:${QueueName}-deadletter-${AwsProfile}`
-    )
-    deadletterQueue.grantConsumeMessages(func)
+    srcQueue.grantConsumeMessages(func)
+    dstQueue.grantSendMessages(func)
   }
 }
 
 const app = new App()
 new MyStack(app, "Stack", {
+  env: {
+    account: process.env.CDK_DEPLOY_ACCOUNT || envVar("CDK_DEFAULT_ACCOUNT"),
+    region: process.env.CDK_DEPLOY_REGION || envVar("CDK_DEFAULT_REGION"),
+  },
   tags: {
     Creator: "cdk",
     Environment: AwsProfile,

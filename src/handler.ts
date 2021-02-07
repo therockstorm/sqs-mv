@@ -1,8 +1,13 @@
 import "source-map-support/register"
-import { Event } from "."
+import { Event, QueueUrl } from "."
 import { move } from "./move"
+import { envVar } from "./util"
 
-export async function handle(evt: Event): Promise<void> {
-  console.log("Event received", evt)
+const evt: Event = {
+  srcUrl: envVar("SRC_URL") as QueueUrl,
+  dstUrl: envVar("DST_URL") as QueueUrl,
+}
+
+export async function handle(): Promise<void> {
   await move(evt)
 }

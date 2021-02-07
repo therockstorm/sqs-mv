@@ -11,3 +11,5 @@ node_modules/
 *.js
 !jest.config.js
 *.d.ts
+
+deploy_dev.sh

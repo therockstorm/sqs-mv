@@ -7,9 +7,6 @@ const limit = pLimit(50)
 const sqs = new SQS({})
 
 export async function move(evt: Event): Promise<void> {
-  if (!evt.srcUrl) throw new Error("srcUrl required")
-  if (!evt.dstUrl) throw new Error("dstUrl required")
-
   const moveMsg = async (m: Message) => {
     await sendMessage(evt.dstUrl, m.Body)
     await deleteMessage(evt.srcUrl, m.ReceiptHandle)
