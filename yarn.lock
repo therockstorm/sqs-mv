@@ -129,7 +129,7 @@
     "@aws-cdk/region-info" "1.88.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-kms@1.88.0", "@aws-cdk/aws-kms@^1.88.0":
+"@aws-cdk/aws-kms@1.88.0", "@aws-cdk/aws-kms@^1.88":
   version "1.88.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-kms/-/aws-kms-1.88.0.tgz#5bc82bae11b0d7ea529a2c7caf25b6e292eeabc4"
   integrity sha512-c5xmchJDMcTVzmYyTPzDX3zYMI9SybB53mVfwIcZSAqGw3WVb9rbOPMo/jxkDaAoDRX1U0I2Qga6gPqWmDSkEw==
@@ -139,7 +139,7 @@
     "@aws-cdk/cx-api" "1.88.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-lambda-nodejs@^1.88.0":
+"@aws-cdk/aws-lambda-nodejs@^1.88":
   version "1.88.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda-nodejs/-/aws-lambda-nodejs-1.88.0.tgz#cdaa36d29e0b655ef1e658f3bc3014dfa0447bc3"
   integrity sha512-aa5h55MwfnHNy8hMDJcvM/8ZPKN0dnmUP27MiREjTa2nrF05/IfYz6uQie7C+hfRxys4s8JK3V4w1vtR0g4rKA==
@@ -148,7 +148,7 @@
     "@aws-cdk/core" "1.88.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-lambda@1.88.0", "@aws-cdk/aws-lambda@^1.88.0":
+"@aws-cdk/aws-lambda@1.88.0", "@aws-cdk/aws-lambda@^1.88":
   version "1.88.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda/-/aws-lambda-1.88.0.tgz#e9f7945a20415c6459742e67b44b2939aa8cf18e"
   integrity sha512-1ESJV5IO4na92uhNw1b5vqpIyZJf91ceKmKFCHmmI/lYNdjVzgnjog0/+zI7AHaj3yObEEImPyuuGWmed2/+kQ==
@@ -208,7 +208,7 @@
     "@aws-cdk/cx-api" "1.88.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-sqs@1.88.0", "@aws-cdk/aws-sqs@^1.88.0":
+"@aws-cdk/aws-sqs@1.88.0", "@aws-cdk/aws-sqs@^1.88":
   version "1.88.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sqs/-/aws-sqs-1.88.0.tgz#e2ca88ed7d20db7f3e624d77cdf8b07b553310e0"
   integrity sha512-3deOulEBA+zR5CHqT/Ksa2i2uGiBdE8JUdwgIxX1IBtIi0u26ud10qxedoKRWh0jbBTrjk/h7otKyK8lbiYOBQ==
@@ -335,7 +335,7 @@
     "@aws-sdk/types" "3.4.1"
     tslib "^1.8.0"
 
-"@aws-sdk/client-sqs@^3.4.1":
+"@aws-sdk/client-sqs@^3.4":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-sqs/-/client-sqs-3.4.1.tgz#92685bf0f4e5f6d142b86ccc88f7ee860b8635a3"
   integrity sha512-FzqljjtmmCDGVOq+G/s2sxSuP+TKt6+Sd/0BTZ4/dtoIUsILi2Lw7pS3OQ/noj+bAx4c+csfVYr5BvNPZ462LQ==
@@ -2839,7 +2839,7 @@ cdk-assets@1.88.0:
     glob "^7.1.6"
     yargs "^16.2.0"
 
-cdk@^1.88.0:
+cdk@^1.88:
   version "1.88.0"
   resolved "https://registry.yarnpkg.com/cdk/-/cdk-1.88.0.tgz#9b1e4ab8556258e64e42f68d4fef3e0cf8851f85"
   integrity sha512-KnLLOxupfz3M6KgSEta5bXhbUx+CoJx1pIdGXTExxu0j30/0+qDLfy/PU5S5e7Zy3a45MHYTsQ2Lw2SOwRb34w==

@@ -11,17 +11,17 @@
     "test": "skripts test"
   },
   "dependencies": {
-    "@aws-sdk/client-sqs": "^3.4.1",
+    "@aws-sdk/client-sqs": "^3.4",
     "p-limit": "^3.1",
     "p-whilst": "^2.1",
     "source-map-support": "^0.5"
   },
   "devDependencies": {
-    "@aws-cdk/aws-kms": "^1.88.0",
-    "@aws-cdk/aws-lambda": "^1.88.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.88.0",
-    "@aws-cdk/aws-sqs": "^1.88.0",
-    "cdk": "^1.88.0",
+    "@aws-cdk/aws-kms": "^1.88",
+    "@aws-cdk/aws-lambda": "^1.88",
+    "@aws-cdk/aws-lambda-nodejs": "^1.88",
+    "@aws-cdk/aws-sqs": "^1.88",
+    "cdk": "^1.88",
     "eslint": "^7.19",
     "husky": "^4.3",
     "skripts": "^0.10",
