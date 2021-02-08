@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.4.1",
-    "p-limit": "^2.2",
+    "p-limit": "^3.1",
     "p-whilst": "^2.1",
     "source-map-support": "^0.5"
   },
@@ -21,11 +21,9 @@
     "@aws-cdk/aws-lambda": "^1.88.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.88.0",
     "@aws-cdk/aws-sqs": "^1.88.0",
-    "@types/jest-when": "^2.7.2",
     "cdk": "^1.88.0",
-    "eslint": "^7.18",
+    "eslint": "^7.19",
     "husky": "^4.3",
-    "jest-when": "^3.1.0",
     "skripts": "^0.10",
     "typescript": "^4"
   },
