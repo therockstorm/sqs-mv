@@ -33,7 +33,7 @@ export class MyStack extends Stack {
       handler: "handle",
       logRetention: 7,
       memorySize: 1024,
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       timeout: Duration.minutes(2),
     })
 

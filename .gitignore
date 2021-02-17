@@ -1,7 +1,8 @@
 .DS_Store
-deploy_dev.sh
+scripts/dev.sh
 
 .cdk.staging
+.husky/
 .idea/
 .vscode/
 .webpack/
