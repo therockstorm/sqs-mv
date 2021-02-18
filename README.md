@@ -22,7 +22,7 @@ yarn lint
 
 ## Deploying
 
-The Lambda is deployed using [AWS CDK](https://aws.amazon.com/cdk/) with the stack defined at `./scripts/stack.ts`. 
+The Lambda is deployed using [AWS CDK](https://aws.amazon.com/cdk/) with the stack defined at `./scripts/stack.ts`.
 
 Create a `./scripts/dev.sh` that calls `./scripts/cdk.sh` with the proper arguments. Here's an example `dev.sh` file,
 

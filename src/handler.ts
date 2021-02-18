@@ -1,5 +1,5 @@
 import "source-map-support/register"
-import { Event, QueueUrl } from "."
+import { Event, QueueUrl } from "./types"
 import { move } from "./move"
 import { envVar } from "./util"
 

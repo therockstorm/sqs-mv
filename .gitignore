@@ -9,5 +9,5 @@ scripts/dev.sh
 cdk.out
 coverage/
 node_modules/
-scripts/*.js
-scripts/*.d.ts
+*.js
+*.d.ts
