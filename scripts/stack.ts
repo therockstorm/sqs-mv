@@ -9,7 +9,8 @@ import { name } from "../package.json"
 
 interface Props extends StackProps {
   functionName: string
-  kmsKeyId: string
+  /** Provide if your queues are encrypted */
+  kmsKeyId?: string
   queueNames: {
     dst: string
     src: string
@@ -37,13 +38,15 @@ export class MyStack extends Stack {
       timeout: Duration.minutes(2),
     })
 
-    const key = Key.fromKeyArn(
-      this,
-      "SqsKey",
-      `arn:aws:kms:${this.region}:${this.account}:key/${props.kmsKeyId}`
-    )
+    if (props.kmsKeyId != null) {
+      const key = Key.fromKeyArn(
+        this,
+        "SqsKey",
+        `arn:aws:kms:${this.region}:${this.account}:key/${props.kmsKeyId}`
+      )
+      key.grantDecrypt(func)
+    }
 
-    key.grantDecrypt(func)
     srcQueue.grantConsumeMessages(func)
     dstQueue.grantSendMessages(func)
   }
@@ -61,11 +64,11 @@ const AwsProfile = envVar("AWS_PROFILE")
 const app = new App()
 new MyStack(app, "Stack", {
   env: {
-    account: process.env.CDK_DEPLOY_ACCOUNT || envVar("CDK_DEFAULT_ACCOUNT"),
-    region: process.env.CDK_DEPLOY_REGION || envVar("CDK_DEFAULT_REGION"),
+    account: process.env.CDK_DEPLOY_ACCOUNT || process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEPLOY_REGION || process.env.CDK_DEFAULT_REGION,
   },
   functionName: `sqs-mv-func-${AwsProfile}`,
-  kmsKeyId: envVar("SQS_MV_KMS_KEY_ID"),
+  kmsKeyId: process.env.SQS_MV_KMS_KEY_ID,
   queueNames: {
     dst: envVar("SQS_MV_DST_QUEUE_NAME"),
     src: envVar("SQS_MV_SRC_QUEUE_NAME"),
@@ -74,5 +77,6 @@ new MyStack(app, "Stack", {
     Creator: "cdk",
     Environment: AwsProfile,
     Project: name,
+    Revision: process.env.GIT_SHORT_REV || "",
   },
 })
