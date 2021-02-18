@@ -18,11 +18,11 @@
     "source-map-support": "^0.5"
   },
   "devDependencies": {
-    "@aws-cdk/aws-kms": "^1.89",
-    "@aws-cdk/aws-lambda": "^1.89",
-    "@aws-cdk/aws-lambda-nodejs": "^1.89",
-    "@aws-cdk/aws-sqs": "^1.89",
-    "cdk": "^1.89",
+    "@aws-cdk/aws-kms": "^1.90",
+    "@aws-cdk/aws-lambda": "^1.90",
+    "@aws-cdk/aws-lambda-nodejs": "^1.90",
+    "@aws-cdk/aws-sqs": "^1.90",
+    "cdk": "^1.90",
     "eslint": "^7.20",
     "husky": "^5",
     "skripts": "^0.10",
